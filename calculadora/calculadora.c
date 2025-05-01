@@ -1,58 +1,42 @@
-#include <stdio.h>
+#include <gtk/gtk.h>
 
-void adicionar(double a, double b) {
-    printf("Resultado da adição: %.2f\n", a + b);
+void on_btn_somar_clicked(GtkButton *button, gpointer user_data) {
+    GtkEntry *entrada1 = GTK_ENTRY(user_data);
+    GtkEntry *entrada2 = g_object_get_data(G_OBJECT(button), "entrada2");
+    GtkLabel *resultado = g_object_get_data(G_OBJECT(button), "resultado");
+
+    const gchar *txt1 = gtk_entry_get_text(entrada1);
+    const gchar *txt2 = gtk_entry_get_text(entrada2);
+
+    double a = atof(txt1);
+    double b = atof(txt2);
+
+    char res[100];
+    snprintf(res, sizeof(res), "Resultado: %.2f", a + b);
+    gtk_label_set_text(resultado, res);
 }
 
-void subtrair(double a, double b) {
-    printf("Resultado da subtração: %.2f\n", a - b);
-}
+int main(int argc, char *argv[]) {
+    GtkBuilder *builder;
+    GtkWidget *window;
+    GtkWidget *btn_somar, *entrada1, *entrada2, *lbl_resultado;
 
-void multiplicar(double a, double b) {
-    printf("Resultado da multiplicação: %.2f\n", a * b);
-}
+    gtk_init(&argc, &argv);
 
-void dividir(double a, double b) {
-    if (b != 0) {
-        printf("Resultado da divisão: %.2f\n", a / b);
-    } else {
-        printf("Erro: Divisão por zero não é permitida.\n");
-    }
-}
+    builder = gtk_builder_new_from_file("calculadora.glade");
 
-int main() {
-    double num1, num2;
-    int opcao;
+    window = GTK_WIDGET(gtk_builder_get_object(builder, "janela_principal"));
+    btn_somar = GTK_WIDGET(gtk_builder_get_object(builder, "btn_somar"));
+    entrada1 = GTK_WIDGET(gtk_builder_get_object(builder, "entrada1"));
+    entrada2 = GTK_WIDGET(gtk_builder_get_object(builder, "entrada2"));
+    lbl_resultado = GTK_WIDGET(gtk_builder_get_object(builder, "lbl_resultado"));
 
-    printf("Calculadora Científica\n");
-    printf("1. Adição\n");
-    printf("2. Subtração\n");
-    printf("3. Multiplicação\n");
-    printf("4. Divisão\n");
-    printf("Escolha uma operação (1-4): ");
-    scanf("%d", &opcao);
+    g_object_set_data(G_OBJECT(btn_somar), "entrada2", entrada2);
+    g_object_set_data(G_OBJECT(btn_somar), "resultado", lbl_resultado);
+    g_signal_connect(btn_somar, "clicked", G_CALLBACK(on_btn_somar_clicked), entrada1);
 
-    printf("Digite o primeiro número: ");
-    scanf("%lf", &num1);
-    printf("Digite o segundo número: ");
-    scanf("%lf", &num2);
-
-    switch (opcao) {
-        case 1:
-            adicionar(num1, num2);
-            break;
-        case 2:
-            subtrair(num1, num2);
-            break;
-        case 3:
-            multiplicar(num1, num2);
-            break;
-        case 4:
-            dividir(num1, num2);
-            break;
-        default:
-            printf("Opção inválida.\n");
-    }
+    gtk_widget_show_all(window);
+    gtk_main();
 
     return 0;
 }
