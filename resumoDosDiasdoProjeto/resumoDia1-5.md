@@ -8,7 +8,7 @@ Desenvolver uma calculadora científica em linguagem C para um curso no YouTube,
 ## ✅ Etapas já concluídas
 
 ### 1. Lógica em C (Terminal)
-O usuário criou as funções básicas:
+Foi cirada as funções básicas:
 - `adicionar(a, b)`
 - `subtrair(a, b)`
 - `multiplicar(a, b)`
