@@ -8,6 +8,6 @@
 
 calculadora/
 ├── calculadora.glade
-└── main.c
+└── calculadora.c
 
 ```
