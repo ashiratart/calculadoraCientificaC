@@ -6,7 +6,7 @@
 
 ```
 
-calculadora/
+c/
 ├── calculadora.h
 └── calculadora.c
 └── eq.c
