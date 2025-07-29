@@ -7,7 +7,11 @@
 ```
 
 calculadora/
-├── calculadora.glade
+├── calculadora.h
 └── calculadora.c
+└── eq.c
+└── hiperboricos.c
+└── log.c
+└── trigonometrico.c
 
 ```
