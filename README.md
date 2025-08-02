@@ -13,5 +13,6 @@ c/
 └── hiperboricos.c
 └── log.c
 └── trigonometrico.c
+└── matrix.c
 
 ```
