@@ -1,4 +1,4 @@
-#include "calcukadora.h"
+#include "calculadora.h"
 
 // Equaciones de 2° grado
 float delta = (b * b) - (4 * a * c);
